@@ -29,7 +29,7 @@ namespace NewtonFrac {
 
             for (int i = 0; i < pictureBox1.Height; i++) {
                 for (int j = 0; j < pictureBox1.Width; j++) {
-                    myPen.Color = Color.FromArgb(res[j, i], res[j, i], 0);
+                    myPen.Color = Color.FromArgb(0, res[j, i], res[j, i]);
                     g.DrawRectangle(myPen, j, i, 1, 1);
                 }
             }
@@ -69,17 +69,18 @@ namespace NewtonFrac {
                         int k = 6;
 
                         // x^k-1
-                        z = z - (z.Pow(k) - 1) / (k * z.Pow(k - 1));
+                        //z = z - (z.Pow(k) - 1) / (k * z.Pow(k - 1));
 
                         // x^k+z^k/2+1
-                        //z = z - (1 + z.Pow(k) + z.Pow(k / 2)) / (k * z.Pow(k - 1) + (k / 2) * z.Pow(k / 2 - 1));
+                        z = z - (z.Pow(8) + 15 * z.Pow(4) - 16) / (8 * z.Pow(7) + 15 * 4 * z.Pow(3));
 
                         d = (t - z).Mod().Abs();
                         n++;
                     }
 
-                    int col = (n * 9) % 255;
-                    FracField[mx + x, my + y] = col;
+
+
+                    FracField[mx + x, my + y] = (n * 9) % 255;
                 }
             }
 
